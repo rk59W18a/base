@@ -1,0 +1,56 @@
+package dominio;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
+
+public class SottoCategoria extends Categoria implements Serializable
+{
+	private static final long serialVersionUID = 1L;
+
+	private String nomeSottoC;
+    
+    public static final String DESCRIZIONE_SOTTOCATEGORIA = "Nome sottocategoria: %s\n\t";
+    public static final String ELENCO_RISORSE_VUOTO = "Al momento non sono presenti risorse\n";
+    public static final String INTESTAZIONE_RISORSE = "Risorse in essa contenute:\n";
+    
+   /**
+    * @post: elencoRisorse != null
+    */
+    public SottoCategoria(String ns)
+    {
+    	    super();
+    	    this.nomeSottoC= ns;
+    	    elencoRisorse = new ArrayList <Risorsa> ();
+    }
+    
+    public String getNome()
+    {
+    	    return nomeSottoC;
+    }
+    
+    /**
+     * @pre: elencoRisorse != null
+     */
+    public String toString()
+    {
+ 	   StringBuffer ris = new StringBuffer();
+ 	   ris.append(String.format(DESCRIZIONE_SOTTOCATEGORIA, nomeSottoC));
+ 	   
+ 	   if(elencoRisorse.size() == 0)
+ 		   ris.append(ELENCO_RISORSE_VUOTO);
+ 	   else
+ 	   {
+ 	      ris.append(INTESTAZIONE_RISORSE);
+ 	      
+ 		  for(int i = 0; i < elencoRisorse.size(); i++)
+ 	      {
+ 		     Risorsa r = elencoRisorse.get(i);
+ 		     ris.append("\t\t" + (i+1) + ")"+ r.toString());
+ 	      }  
+ 	   }
+ 	   
+ 	   return ris.toString();
+    }
+    
+}
